@@ -7,12 +7,21 @@ import bodyParser from "body-parser";
 import path from "path";
 import routes from "./routes";
 import { sequelize } from "./database/sequelize";
+import link from "./views/helpers/link";
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.engine("handlebars", engine());
+app.engine(
+  "handlebars",
+  engine({
+    helpers: {
+      link,
+    },
+  })
+);
+
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 

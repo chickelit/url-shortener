@@ -2,7 +2,9 @@ import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 
 interface ShortenedUrlAttributes {
   id: number;
-  url: string;
+  key: string;
+  originalUrl: string;
+  shortenedUrl: string;
 }
 
 interface ShortenedUrlCreationAttributes
@@ -13,7 +15,9 @@ export class ShortenedUrlClass
   implements ShortenedUrlAttributes
 {
   declare id: number;
-  declare url: string;
+  declare key: string;
+  declare originalUrl: string;
+  declare shortenedUrl: string;
 }
 
 export const shortenedUrlModel = (sequelize: Sequelize) => {
@@ -24,7 +28,16 @@ export const shortenedUrlModel = (sequelize: Sequelize) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      url: {
+      key: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      originalUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      shortenedUrl: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -9,9 +9,14 @@
     />
   </head>
   <body>
-    <form autocomplete="off" action="/" method="post" role="form">
+    <form autocomplete="on" action="/" method="post" role="form">
       <input name="url" type="url" placeholder="Link" />
       <button type="submit">Submit</button>
     </form>
+    {{#if shortenedUrl}}
+      <div>
+        {{link shortenedUrl shortenedUrl}}
+      </div>
+    {{/if}}
   </body>
 </html>
