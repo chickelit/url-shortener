@@ -38,4 +38,28 @@ router.post("/", async (request: Request, response: Response) => {
   }
 });
 
+router.get("/:key", async (request: Request, response: Response) => {
+  const { key } = request.params;
+
+  try {
+    const shortenedUrlInstance = await ShortenedUrl.findOne({
+      where: {
+        key,
+      },
+    });
+
+    if (!shortenedUrlInstance) {
+      return response.status(404).json({
+        message: "URL not found.",
+      });
+    }
+
+    return response.render("redirect", {
+      url: shortenedUrlInstance.originalUrl,
+    });
+  } catch (error) {
+    return response.status(500).json(error);
+  }
+});
+
 export default router;

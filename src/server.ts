@@ -8,6 +8,7 @@ import path from "path";
 import routes from "./routes";
 import { sequelize } from "./database/sequelize";
 import link from "./views/helpers/link";
+import server from "http";
 
 const app = express();
 
@@ -27,7 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(routes);
 
-app.listen(process.env.PORT, async () => {
+app.listen(+process.env.PORT!, process.env.IP!, async () => {
   try {
     await sequelize.sync({
       force: true,

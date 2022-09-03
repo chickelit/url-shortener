@@ -34,7 +34,7 @@ export const shortenedUrlModel = (sequelize: Sequelize) => {
         unique: true,
       },
       originalUrl: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT("long"),
         allowNull: false,
       },
       shortenedUrl: {
@@ -44,6 +44,7 @@ export const shortenedUrlModel = (sequelize: Sequelize) => {
     },
     {
       sequelize,
+      tableName: "shortened_urls",
     }
   );
 
