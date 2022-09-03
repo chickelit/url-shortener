@@ -6,6 +6,7 @@ import { engine } from "express-handlebars";
 import bodyParser from "body-parser";
 import path from "path";
 import routes from "./routes";
+import { sequelize } from "./database/sequelize";
 
 const app = express();
 
@@ -17,6 +18,14 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(routes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`App running on port: ${process.env.PORT}`);
+app.listen(process.env.PORT, async () => {
+  try {
+    await sequelize.sync({
+      force: true,
+    });
+
+    console.log(`App running on port: ${process.env.PORT}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
