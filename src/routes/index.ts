@@ -5,18 +5,14 @@ import crypto from "crypto";
 
 const router = Router();
 
-interface StoreAttributes {
+interface PostAttributes {
   url: string;
   redirectUrl: string;
 }
 
-router.get("/", (request: Request, response: Response) => {
-  return response.render("home");
-});
-
-router.post("/", async (request: Request, response: Response) => {
+router.post("/shortened-urls", async (request: Request, response: Response) => {
   try {
-    const body: StoreAttributes = request.body;
+    const body: PostAttributes = request.body;
     const { error } = storeValidator.validate(body);
 
     if (error) {
@@ -32,7 +28,7 @@ router.post("/", async (request: Request, response: Response) => {
       shortenedUrl: `${process.env.APP_URL!.replace(/\/$/, "")}/${key}`,
     });
 
-    return response.render("home", { shortenedUrl });
+    return response.status(200).json(shortenedUrl);
   } catch (error) {
     return response.status(500).json(error);
   }
@@ -54,9 +50,7 @@ router.get("/:key", async (request: Request, response: Response) => {
       });
     }
 
-    return response.render("redirect", {
-      url: shortenedUrlInstance.originalUrl,
-    });
+    return response.status(200).json(shortenedUrlInstance);
   } catch (error) {
     return response.status(500).json(error);
   }
