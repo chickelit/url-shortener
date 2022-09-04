@@ -20,12 +20,12 @@ router.post("/shortened-urls", async (request: Request, response: Response) => {
     }
 
     const key = crypto.randomBytes(4).toString("hex");
-    const parsedUrl = body.url.replace(/\/$/, "");
+    const redirectUrl = body.redirectUrl.replace(/\/$/, "");
 
-    const { shortenedUrl } = await ShortenedUrl.create({
-      originalUrl: parsedUrl,
+    const shortenedUrl = await ShortenedUrl.create({
       key,
-      shortenedUrl: `${process.env.APP_URL!.replace(/\/$/, "")}/${key}`,
+      originalUrl: body.url,
+      shortenedUrl: `${redirectUrl}/${key}`,
     });
 
     return response.status(200).json(shortenedUrl);
