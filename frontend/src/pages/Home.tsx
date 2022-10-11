@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { IShortenedUrl } from "../Models/IShortenedUrl";
 import { $axios } from "../utils/axios";
-import "../../public/styles/home.css";
+import "/public/styles/home.css";
 
 interface IForm {
   url: string;
@@ -41,7 +41,7 @@ function Home() {
   return (
     <div className="home">
       <h3>URL shortener</h3>
-      <form className="main-form" onSubmit={onSubmit}>
+      <form autoComplete="off" className="main-form" onSubmit={onSubmit}>
         <input
           className={hasError ? "has-error" : ""}
           type={"url"}
@@ -54,7 +54,7 @@ function Home() {
         <button type="submit">{isLoading ? "Shortening..." : "Shorten"}</button>
       </form>
       <div className="shortened-url">
-        {data && <a href={data.shortenedUrl!}>{data.shortenedUrl}</a>}
+        {data && <a href={data.shortenedUrl!} target={"_blank"}>{data.shortenedUrl}</a>}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { $axios } from "../utils/axios";
-import "../../public/styles/error-page.css";
+import "/public/styles/error-page.css";
 
 export function Redirect() {
   const { key } = useParams();
