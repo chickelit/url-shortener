@@ -66,6 +66,24 @@ $ npm run dev
 # A aplicação iniciará na porta indicada no terminal.
 ```
 
+### 🎲 Rodando o Front End
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/jose13162/url-shortener
+
+# Acesse a pasta do frontend no terminal/cmd
+$ cd url-shortener/frontend
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+
+# A aplicação iniciará na URL indicada pelo terminal.
+```
+
 <div id="tecnologias"></div>
 
 ### 🛠 Tecnologias
